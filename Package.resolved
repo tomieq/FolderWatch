@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "logger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tomieq/Logger",
+      "state" : {
+        "revision" : "2b2ba45ef13ed840ca331dcab94d45386f5b8aa5",
+        "version" : "1.0.2"
+      }
+    },
+    {
       "identity" : "swiftextensions",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tomieq/SwiftExtensions",
