@@ -18,4 +18,4 @@ DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
     cameraStream.stop()
 }
 
-dispatchMain()
+RunLoop.main.run()
