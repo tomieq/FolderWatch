@@ -1,5 +1,5 @@
 //
-//  FaceRecognition.swift
+//  HumanRecognition.swift
 //  FolderWatch
 //
 //  Created by Tomasz on 21/05/2025.
@@ -9,12 +9,11 @@ import Foundation
 import Vision
 import Logger
 
-enum FaceRecognitionError: Error {
+enum HumanRecognitionError: Error {
     case timeout
 }
 
-enum FaceRecognition {
-    
+enum HumanRecognition {
     private static var processCounter = 1
     private static var nextProcessID: String {
         defer {
@@ -24,12 +23,12 @@ enum FaceRecognition {
     }
     private static let logger = Logger(Self.self)
     
-    static func process(bytes: [UInt8], timeLimit: Double) -> Result<[CGRect], FaceRecognitionError> {
+    static func process(bytes: [UInt8], timeLimit: Double) -> Result<[CGRect], HumanRecognitionError> {
         let semaphore = DispatchSemaphore(value: 0)
-        var recognizedFaces: [CGRect] = []
+        var recognizedPeople: [CGRect] = []
         DispatchQueue.global().async {
-            Self.findFace(in: bytes) { txts in
-                recognizedFaces = txts
+            Self.findPerson(in: bytes) { txts in
+                recognizedPeople = txts
                 semaphore.signal()
             }
         }
@@ -38,24 +37,24 @@ enum FaceRecognition {
             logger.i("Image recognition timed out.")
             return .failure(.timeout)
         }
-        return .success(recognizedFaces)
+        return .success(recognizedPeople)
     }
     
-    private static func findFace(in bytes: [UInt8], _ callback: @escaping ([CGRect]) -> Void) {
+    private static func findPerson(in bytes: [UInt8], _ callback: @escaping ([CGRect]) -> Void) {
         let processID = self.nextProcessID
         let clock = ContinuousClock()
         let duration = clock.measure {
             let visionHandler = VNImageRequestHandler(data: Data(bytes))
             do {
-                let visionRequest = VNDetectFaceRectanglesRequest(completionHandler: { (request, error) in
+                let visionRequest = VNDetectHumanRectanglesRequest(completionHandler: { (request, error) in
                     logger.i("\(processID): Image processing finished with \(request.results?.count ?? 0) observations")
                     
                     if error != nil {
-                        logger.e("\(processID): FaceDetection error: \(String(describing: error)).")
+                        logger.e("\(processID): Detection error: \(String(describing: error)).")
                     }
                     
-                    guard let faceDetectionRequest = request as? VNDetectFaceRectanglesRequest,
-                          let results = faceDetectionRequest.results else {
+                    guard let humanDetectionRequest = request as? VNDetectHumanRectanglesRequest,
+                          let results = humanDetectionRequest.results else {
                         callback([])
                         return
                     }

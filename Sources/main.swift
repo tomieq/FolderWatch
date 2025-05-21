@@ -15,13 +15,13 @@ _ = try PhotoMonitor { url in
         let image = Image(url: url)!
         let pixelConverter = BoundingBoxConverter(imageWidth: image.size.width, imageHeight: image.size.height)
 
-        let result = FaceRecognition.process(bytes: data.bytes, timeLimit: 10)
+        let result = HumanRecognition.process(bytes: data.bytes, timeLimit: 10)
         switch result {
         case .success(let boundingBoxes):
             
             for boundingBox in boundingBoxes {
-                let box = pixelConverter.pixels(from: boundingBox).enlarged(scale: 1.3)
-                print("Found face: x: \(box.x), y: \(box.y), width: \(box.width), height: \(box.height)")
+                let box = pixelConverter.pixels(from: boundingBox).enlarged(scale: 1.6)
+                print("Found person: x: \(box.x), y: \(box.y), width: \(box.width), height: \(box.height)")
                 
                 try image
                     .cropped(to: Rectangle(x: box.x, y: box.y, width: box.width, height: box.height))?
