@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "env",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tomieq/Env",
+      "state" : {
+        "revision" : "c16e61cdd628452cc9915b72265406bd9b9fbf90",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "filemonitor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aus-der-Technik/FileMonitor.git",
+      "state" : {
+        "revision" : "ef22f1487d07fbff0a7a5f743d42611bfd03b5e8",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "swiftextensions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tomieq/SwiftExtensions",
+      "state" : {
+        "branch" : "master",
+        "revision" : "e1325a2d125cc0cca9944fe06cce26fbdf1c613f"
+      }
+    },
+    {
+      "identity" : "swiftgd",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twostraws/SwiftGD.git",
+      "state" : {
+        "revision" : "1960998971b453101e740f25bc6d9fb01e0ba225",
+        "version" : "2.5.0"
+      }
+    }
+  ],
+  "version" : 2
+}

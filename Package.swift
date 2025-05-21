@@ -11,7 +11,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/aus-der-Technik/FileMonitor.git", from: "1.0.0"),
         .package(url: "https://github.com/twostraws/SwiftGD.git", from: "2.0.0"),
-        .package(url: "https://github.com/tomieq/Env", exact: "1.0.1")
+        .package(url: "https://github.com/tomieq/Env", exact: "1.0.1"),
+        .package(url: "https://github.com/tomieq/SwiftExtensions", branch: "master")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -21,7 +22,8 @@ let package = Package(
             dependencies: [
                 .product(name: "FileMonitor", package: "FileMonitor"),
                 .product(name: "SwiftGD", package: "SwiftGD"),
-                .product(name: "Env", package: "Env")
+                .product(name: "Env", package: "Env"),
+                .product(name: "SwiftExtensions", package: "SwiftExtensions")
             ]),
     ]
 )
