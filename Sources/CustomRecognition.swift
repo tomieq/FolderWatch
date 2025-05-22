@@ -36,7 +36,7 @@ class CustomRecognition {
         coreModel = try VNCoreMLModel(for: model)
     }
     
-    func process(bytes: [UInt8], timeLimit: Double) -> Result<[CustomObject], HumanRecognitionError> {
+    func process(bytes: [UInt8], timeLimit: Double) -> Result<[CustomObject], CustomRecognitionError> {
         let semaphore = DispatchSemaphore(value: 0)
         var recognizedObjects: [CustomObject] = []
         DispatchQueue.global().async { [unowned self] in

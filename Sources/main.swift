@@ -5,13 +5,21 @@ import Env
 import SwiftExtensions
 import Dispatch
 
+
+
+enum ConfigError: Swift.Error {
+    case invalidPhotoPath
+}
 let env = Env()
 _ = try env.load(filename: "local.env")
+guard let photoPath = env.get("PHOTO_DIRECTORY"), let photoDir = URL(string: photoPath) else {
+    throw ConfigError.invalidPhotoPath
+}
 
 let yoloRecognizer = try CustomRecognition(modelPath: "/Users/tomaskuc/dev/FolderWatch/model/YOLOv3.mlmodelc")
 
 let resultDir = env.get("RESULTS_DIRECTORY")!
-_ = try PhotoMonitor { url in
+_ = try PhotoMonitor(folder: photoDir) { url in
     processImage(url: url)
 }
         

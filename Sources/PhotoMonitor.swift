@@ -7,23 +7,15 @@
 
 import Foundation
 import FileMonitor
-import SwiftGD
 import Logger
-import Env
 
-enum PhotoMonitorError: Swift.Error {
-    case invalidPhotoPath
-}
 struct PhotoMonitor: FileDidChangeDelegate {
     private let watcher: ((URL) -> Void)
     private let logger = Logger(PhotoMonitor.self)
 
-    init(watcher: @escaping (URL) -> Void) throws {
-        guard let photoPath = env.get("PHOTO_DIRECTORY"), let photoDir = URL(string: photoPath) else {
-            throw PhotoMonitorError.invalidPhotoPath
-        }
+    init(folder: URL, watcher: @escaping (URL) -> Void) throws {
         self.watcher = watcher
-        let monitor = try FileMonitor(directory: photoDir, delegate: self )
+        let monitor = try FileMonitor(directory: folder, delegate: self )
         try monitor.start()
     }
     
