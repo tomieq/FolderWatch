@@ -66,7 +66,7 @@ class CustomRecognition {
                     self.logger.i("\(processID): Image processing finished with \(request.results?.count ?? 0) observations")
                 }
                 let results = (request as? MLRequestType)?.results as? [VNRecognizedObjectObservation] ?? []
-                callback(results.map {  CustomObject(boundingBox: $0.boundingBox, label: $0.labels.first?.identifier ?? "")})
+                callback(results.map { CustomObject(boundingBox: $0.boundingBox, label: $0.labels.first?.identifier ?? "")})
             })
             logger.i("\(processID): Start image processing")
             do {

@@ -1,5 +1,5 @@
 //
-//  BoundingBoxConverter.swift
+//  MLCoreToPixelConverter.swift
 //  FolderWatch
 //
 //  Created by Tomasz on 21/05/2025.
@@ -43,7 +43,7 @@ extension PixeledBox {
     }
 }
 
-struct BoundingBoxConverter {
+struct MLCoreToPixelConverter {
     let imageSize: ImageSize
     
     func pixels(from boundingBox: CGRect) -> PixeledBox {

@@ -46,7 +46,7 @@ _ = try PhotoMonitor { url in
 //                
 //                let car = image.cropped(to: Rectangle(x: box.x, y: box.y, width: box.width, height: box.height))!
 //                    
-//                let pixelConverter = BoundingBoxConverter(imageWidth: car.size.width, imageHeight: car.size.height)
+//                let pixelConverter = MLCoreToPixelConverter(imageWidth: car.size.width, imageHeight: car.size.height)
 //                let result = carSideRecognizer.process(bytes: try car.export(as: .jpg(quality: 80)).bytes, timeLimit: 10)
 //                switch result {
 //                case .success(let objects):
@@ -89,7 +89,7 @@ func processImage(url: URL) {
         let data = try Data(contentsOf: url)
         let image = Image(url: url)!
         let imageSize = ImageSize(width: image.size.width, height: image.size.height)
-        let pixelConverter = BoundingBoxConverter(imageSize: imageSize)
+        let pixelConverter = MLCoreToPixelConverter(imageSize: imageSize)
         
         let objects = try yoloRecognizer.process(bytes: data.bytes, timeLimit: 10).get()
         for (index, object) in objects.enumerated() {
